@@ -14,7 +14,8 @@ class SppController extends Controller
      */
     public function index()
     {
-        //
+        $spp = Spp::all();
+        return view('admin.spp', compact('spp'));
     }
 
     /**
@@ -24,7 +25,7 @@ class SppController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.spp.create');
     }
 
     /**
@@ -35,7 +36,12 @@ class SppController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $spp = new Spp;
+        $spp->tahun         = $request->tahun;
+        $spp->nominal       = $request->nominal;
+        $spp->save();
+
+        return redirect()->to('spp');
     }
 
     /**
@@ -57,7 +63,7 @@ class SppController extends Controller
      */
     public function edit(Spp $spp)
     {
-        //
+        return view('admin.spp.edit', compact('spp'));
     }
 
     /**
@@ -69,7 +75,19 @@ class SppController extends Controller
      */
     public function update(Request $request, Spp $spp)
     {
-        //
+        $sttr = request()->validate([
+            'tahun'     => 'required|max:4',
+            'nominal'   => 'required'
+        ]);
+        
+        Spp::where('id', $spp->id)->update([
+            'tahun' => $request->tahun,
+            'nominal' => $request->nominal,
+        ]);
+
+        // Spp::update($sttr);
+
+        return back();
     }
 
     /**
@@ -78,8 +96,11 @@ class SppController extends Controller
      * @param  \App\Spp  $spp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Spp $spp)
+    public function destroy($spp)
     {
-        //
+        Spp::destroy($spp);
+
+        return back();
+
     }
 }

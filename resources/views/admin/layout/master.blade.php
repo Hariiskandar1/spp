@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ (request()->is('admin')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('admin.index')}}">
+                <a class="nav-link" href="{{route('admin')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -55,14 +55,14 @@
 
              <!-- Nav Item - Spp -->
              <li class="nav-item {{ (request()->is('spp')) ? 'active' : '' }}">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{route('spp.index')}}">
                     <i class="fas fa-fw fa-money-check-alt"></i>
                     <span>Nominal Spp</span></a>
             </li>
 
             <!-- Nav Item - Kelas -->
             <li class="nav-item {{ (request()->is('class')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('class.index')}}">
+                <a class="nav-link" href="{{route('classe.index')}}">
                     <i class="fas fa-fw fa-university"></i>
                     <span>Data Kelas</span></a>
             </li>

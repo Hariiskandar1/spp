@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,17 @@ Route::get('/', function () {
 
 // admin
 // dashboard
-Route::resource('/admin', 'DashboardController');
+Route::get('/admin', 'DashboardController@index')->name('admin');
 // Data siswa
 Route::resource('/student', 'StudentController');
 // kelas
-Route::resource('/class', 'ClasseController');
+Route::resource('/classe', 'ClasseController');
+// Spp
+Route::resource('/spp', 'SppController');
+Route::post('/spp/{$id}', 'SppController@update');
+Route::get('/destroy/{id}', 'SppController@destroy');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

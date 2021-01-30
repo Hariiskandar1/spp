@@ -36,7 +36,14 @@ class ClasseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $classe = new classe;
+        $classe->class = $request->kelas;
+        $classe->kompetensi_keahlian = $request->kompetensi;
+        $classe->save();
+
+        return redirect()->to('classe/create');
+
+
     }
 
     /**
@@ -81,6 +88,7 @@ class ClasseController extends Controller
      */
     public function destroy(Classe $classe)
     {
-        //
+        Classe::destroy($classe->id);
+        return redirect()->to('classe');
     }
 }

@@ -1,18 +1,19 @@
 @extends('admin.layout.master')
 
 @section('title')
-    Kelas
+    Nominal SPP
 @stop
 
 @section('content')
-<!-- Begin Page Content -->
+
+    <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-end mb-4">
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm mr-2"><i class="fas fa-file-excel fa-sm text-white-50"></i> Import Excel</a>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm mr-2"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Laporan PDF</a>
-        <a href="{{route('classe.create')}}" class="btn btn-sm btn-primary shadow-sm mr-2"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+        <a href="{{route('spp.create')}}" class="btn btn-sm btn-primary shadow-sm mr-2"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
    
     </div>
 
@@ -27,22 +28,21 @@
                     <thead>
                         <tr>
                             <th width="2%">NO</th>
-                            <th width="5%">KELAS</th>
-                            <th>KOMPETENSI KEAHLIAN</th>
-                            <th width="15%" class="text-center">OPSI</th>
+                            <th width="20%">TAHUN AJARAN</th>
+                            <th>NOMINAL</th>
+                            <th width="10%" class="text-center">OPSI</th>
                         </tr>
                     </thead>                  
                     <tbody>
                     <?php $no=1;?>
-                        @foreach($class as $row)
+                        @foreach($spp as $row)
                         <tr>
                             <td class="text-center">{{ $no }}</td>
-                            <td class="text-center">{{ $row->class }}</td>
-                            <td>{{ $row->kompetensi_keahlian }}</td>
+                            <td>{{ $row->tahun }}</td>
+                            <td>{{ $row->nominal }}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-sm btn-info"><i class="fas fa-info-circle"></i></a>
-                                <a href="" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="{{route('classe.destroy',$row->id)}}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                <a href="{{ route('spp.edit',$row->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="{{ url('/destroy/'.$row->id) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         <?php $no++ ;?>
@@ -55,6 +55,6 @@
 
 </div>
 <!-- /.container-fluid -->
+
 </div>
-<!-- End of Main Content -->
 @stop
