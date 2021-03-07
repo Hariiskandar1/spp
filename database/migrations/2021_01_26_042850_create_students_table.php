@@ -18,9 +18,10 @@ class CreateStudentsTable extends Migration
             $table->integer('nisn');
             $table->integer('nis');
             $table->string('name', 191);
+            $table->date('tgl_lahir');
             $table->integer('class_id');
             $table->string('alamat', 255);
-            $table->integer('no_telpon');
+            $table->string('no_telpon');
             $table->integer('id_spp');
             $table->timestamps();
         });

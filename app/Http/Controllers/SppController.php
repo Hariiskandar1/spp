@@ -25,7 +25,7 @@ class SppController extends Controller
      */
     public function create()
     {
-        return view('admin.spp.create');
+       //
     }
 
     /**
@@ -38,10 +38,17 @@ class SppController extends Controller
     {
         $spp = new Spp;
         $spp->tahun         = $request->tahun;
-        $spp->nominal       = $request->nominal;
+        $spp->nominal       = str_replace(".", "", $request->nominal);
         $spp->save();
 
-        return redirect()->to('spp');
+        return back()->with(
+            ['success' => "<script>
+              Swal.fire(
+            'Berhasil',
+            'Data Berhasi Disimpan',
+            'success'
+              )</script>"]
+          );
     }
 
     /**
@@ -73,19 +80,14 @@ class SppController extends Controller
      * @param  \App\Spp  $spp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Spp $spp)
+    public function update(Request $request, $id)
     {
-        $sttr = request()->validate([
-            'tahun'     => 'required|max:4',
-            'nominal'   => 'required'
+        $validatedData = $request->validate([
+            'tahun' => 'required',
+            'nominal' => 'required',
         ]);
         
-        Spp::where('id', $spp->id)->update([
-            'tahun' => $request->tahun,
-            'nominal' => $request->nominal,
-        ]);
-
-        // Spp::update($sttr);
+        Spp::whereId($id)->update($validatedData);
 
         return back();
     }

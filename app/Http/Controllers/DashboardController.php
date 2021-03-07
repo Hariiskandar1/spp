@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
+use App\Payment;
+use App\Spp;
+use App\Classe;
+use App\User;
+use App\Officer;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,7 +19,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $studentC = Student::all()->count();
+        $officer = Officer::all()->count();
+        $student = Student::all();
+        $class = Classe::all()->count();
+        $payment = Payment::all();
+        $spp     = Spp::all();
+        return view('admin.dashboard')
+        ->with(compact('studentC'))
+        ->with(compact('student'))
+        ->with(compact('officer'))
+        ->with(compact('class'))
+        ->with(compact('spp'))
+        ->with(compact('payment'));
     }
 
     /**

@@ -5,15 +5,12 @@
 @stop
 
 @section('content')
-
 <div class="row mt-5">
     <div class="col-md-4"></div>
     <div class="col-md-4 bg-white">
     <h1 class="mt-3 text-center">Edit Nominal SPP</h1>
-
-    <form method="POST" action="{{ url('/spp/' .$spp->id) }}">
+    <form method="POST" action="{{ url('/sppUpdate/' .$spp->id) }}">
             @csrf
-            {{ method_field('PUT') }}
             <div class="form-group">
             <label for="nama">Tahun Ajaran</label>
             <input type="number" class="form-control @error('nama') is-invalid @enderror" id="tahun" name="tahun" value="{{$spp->tahun}}">

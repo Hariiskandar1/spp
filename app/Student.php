@@ -8,8 +8,13 @@ class Student extends Model
 {
     protected $fillable = ['id','nisn','nis','class_id','alamat','no_telpon','id_spp'];
 
-    public function classe()
+    public function classes()
     {
-        return $this->belongsTo(Classe::class);
+        return $this->belongsTo('App\Classe', 'class_id');
+    }
+
+    public function spps()
+    {
+        return $this->belongsTo('App\Spp', 'id_spp');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Officer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class OfficerController extends Controller
 {
@@ -14,7 +15,9 @@ class OfficerController extends Controller
      */
     public function index()
     {
-        //
+        $petugas = Officer::all();
+        return view('admin.petugas')
+        ->with(compact('petugas'));
     }
 
     /**
@@ -35,7 +38,18 @@ class OfficerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $officer = new Officer;
+        $officer->name         = $request->name;
+        $officer->username       = $request->username;
+        $officer->password       = Hash::make($request->password);
+        $officer->save();
+
+        return back();
+        // return Officer::create([
+        //     'name' => $request->name,
+        //     'username' => $request->username,
+        //     'password' => Hash::make($request->password),
+        // ]);
     }
 
     /**

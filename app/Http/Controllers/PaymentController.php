@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Payment;
+use App\student;
+use App\classe;
+use App\spp;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -14,7 +17,15 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payment    = Payment::get();
+        $student    = Student::get();
+        $spp        = Spp::get();
+        $class      = Classe::get();
+        return view('admin.payment')
+        ->with(compact('payment'))
+        ->with(compact('student'))
+        ->with(compact('class'))
+        ->with(compact('spp'));
     }
 
     /**
@@ -78,8 +89,10 @@ class PaymentController extends Controller
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $payment)
+    public function destroy($id)
     {
-        //
+        Payment::destroy($id);
+
+        return back();
     }
 }

@@ -16,8 +16,9 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('id_petugas');
-            $table->bigInteger('nisn');
+            $table->bigInteger('student_id');
             $table->bigInteger('id_spp');
+            $table->string('deskription');
             $table->integer('jumlah_bayar');
             $table->timestamps();
         });

@@ -36,12 +36,19 @@ class ClasseController extends Controller
      */
     public function store(Request $request)
     {
-        $classe = new classe;
+        $classe = new Classe;
         $classe->class = $request->kelas;
         $classe->kompetensi_keahlian = $request->kompetensi;
         $classe->save();
 
-        return redirect()->to('classe/create');
+        return back()->with(
+            ['success' => "<script>
+              Swal.fire(
+            'Berhasil',
+            'Data Berhasi Disimpan',
+            'success'
+              )</script>"]
+          );
 
 
     }
@@ -65,7 +72,7 @@ class ClasseController extends Controller
      */
     public function edit(Classe $classe)
     {
-        //
+        return view('admin.class.edit', compact('classe'));
     }
 
     /**
@@ -75,9 +82,22 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classe $classe)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'class' => 'required|max:255',
+            'kompetensi_keahlian' => 'required',
+        ]);
+        Classe::whereId($id)->update($validatedData);
+
+        return back()->with(
+            ['success' => "<script>
+              Swal.fire(
+            'Berhasil',
+            'Data Berhasi Diubah',
+            'success'
+              )</script>"]
+          );
     }
 
     /**
@@ -86,9 +106,10 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classe $classe)
+    public function destroy($id)
     {
-        Classe::destroy($classe->id);
-        return redirect()->to('classe');
+        Classe::destroy($id);
+
+        return back();
     }
 }
